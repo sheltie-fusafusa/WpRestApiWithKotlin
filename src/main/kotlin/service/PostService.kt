@@ -78,19 +78,19 @@ class PostService {
 
         // アイキャッチ画像をアップロードする
         val mediaTypeImg : MediaType = "image/png".toMediaType()
-        val jsonImg : String = "{source_url : ./28_LGTM.png}"
-        val file : File = File("./28_LGTM.png")
+        val jsonImg : String = "{source_url : ${properties.getProperty("IMG_FILE")}}"
+        val file : File = File("${properties.getProperty("IMG_FILE")}")
 
         val multipartBody : MultipartBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
             .addFormDataPart("Content-Type", "image/png")
-            .addFormDataPart("file", "28_LGTM.png", file.asRequestBody(mediaTypeImg))
+            .addFormDataPart("file", "${properties.getProperty("IMG_FILE")}", file.asRequestBody(mediaTypeImg))
             .build()
 
         val requestEyeCatch: Request = Request.Builder()
             .url(properties.getProperty("WORDPRESS_MEDIA_POST_URL"))
             .addHeader("Content-Type", "multipart/form-data;")
-            .addHeader("Content-Disposition", "attachment;filename=28_LGTM.png")
+            .addHeader("Content-Disposition", "attachment;filename=${properties.getProperty("IMG_FILE")}")
             .addHeader("Authorization", "Basic $authStr")
             .post(multipartBody)
             .build()
