@@ -74,3 +74,4 @@ outTmp/
 /test.output
 /kotlin-native/dist
 kotlin-ide/
+docker-wordpress/db_data
